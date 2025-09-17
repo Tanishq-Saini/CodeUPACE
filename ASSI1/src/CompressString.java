@@ -21,7 +21,7 @@ public class CompressString {
     }
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Enter the String: ");
+        System.out.print("Enter the String: ");
         String str = sc.nextLine();
         CompressedString(str);
     }
