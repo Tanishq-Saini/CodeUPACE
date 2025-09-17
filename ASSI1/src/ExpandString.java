@@ -10,18 +10,13 @@ public class ExpandString {
     }
 
     static String Expand(String s, String result) {
-        for (int i = 0; i < s.length(); i++) {
+        for (int i = 0; i < s.length(); i += 2) {
             char ch = s.charAt(i);
-
-            if (Character.isLetter(ch)) {
-                int count = Character.getNumericValue(s.charAt(i + 1));
-
-                for (int j = 0; j < count; j++) {
-                    result += ch;
-                }
+            int count = s.charAt(i+1) - '0'; //char int me convert
+            for(int j=0; j< count; j++) {
+                result = result + ch;
             }
         }
-
         return result;
     }
 }
