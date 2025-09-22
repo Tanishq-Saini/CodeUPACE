@@ -1,3 +1,6 @@
+//This code is input string and perform various operations like - append, reverse, sort, replace.
+//Author - Tanishq Saini
+//Date - 19/09/2025
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -30,14 +33,14 @@ public class Main {
 
                 System.out.print("Enter the new word: ");
                 String newWord = userInput.nextLine();
-                Replace(sentence , oldWord , newWord);
+                Replace(sentence, oldWord, newWord);
                 break;
 
             case 3:
                 System.out.print("Enter a String : ");
                 String text = userInput.nextLine();
                 System.out.println("Original: " + text);
-                System.out.println("Sorted: "+sort(text));
+                System.out.println("Sorted: " + sort(text));
                 break;
 
             case 4:
@@ -51,25 +54,37 @@ public class Main {
                 System.out.println("Invalid choice!");
         }
     }
-    static void Append(String s1){
-        String name = "Python Programming";
-        StringBuilder result = new StringBuilder(s1);
-        result.append(" ").append(name);
 
-        System.out.println("Final String: " + result.toString());
+    static void Append(String s1) {
+        String name = "Python Programming";
+        String newString = s1 + name;
+        System.out.println("Final String: " + newString);
     }
-    static void Replace(String sentence , String oldWord , String newWord){
+
+    static void Replace(String sentence, String oldWord, String newWord) {
         String result = sentence.replace(oldWord, newWord);
         System.out.println("Modified sentence: " + result);
     }
+
     static String sort(String text) {
         char[] chars = text.toLowerCase().toCharArray();
         Arrays.sort(chars);
         return new String(chars);
 
     }
+
     static String reverse(String text) {
-        StringBuilder sb = new StringBuilder(text);
-        return sb.reverse().toString();
+        if (text.isEmpty()) {
+            System.out.println("String is empty! Nothing to reverse.");
+            return text;
+        }
+
+        String result = "";
+        for (int i = text.length() - 1; i >= 0; i--) {
+            result = result + text.charAt(i);
+        }
+
+        text = result;
+        return result;
     }
 }
