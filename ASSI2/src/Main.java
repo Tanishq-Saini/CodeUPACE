@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        Main obj = new Main();
         Scanner userInput = new Scanner(System.in);
         System.out.println("Choose a program:");
         System.out.println("1. Append String");
@@ -21,31 +22,31 @@ public class Main {
             case 1:
                 System.out.print("Enter something: ");
                 String s1 = userInput.nextLine();
-                Append(s1);
+                obj.Append(s1);
                 break;
 
             case 2:
-                System.out.print("Enter a sentence: ");
+                System.out.print("Enter a Word: ");
                 String sentence = userInput.nextLine();
 
-                System.out.print("Enter the word to replace: ");
-                String oldWord = userInput.nextLine();
+                System.out.print("Enter the character to replace: ");
+                char oldWord = userInput.next().charAt(0);
 
-                System.out.print("Enter the new word: ");
-                String newWord = userInput.nextLine();
-                Replace(sentence, oldWord, newWord);
+                System.out.print("Enter the new character: ");
+                char newWord = userInput.next().charAt(0);
+                System.out.println("New String is : "+ obj.Replace(sentence, oldWord, newWord));
                 break;
 
             case 3:
                 System.out.print("Enter a String : ");
                 String text = userInput.nextLine();
                 System.out.println("Original: " + text);
-                System.out.println("Sorted: " + sort(text));
+                System.out.println("Sorted: " + obj.sort(text));
                 break;
 
             case 4:
                 String name = "Java";
-                String reversedText = reverse(name);
+                String reversedText = obj.reverse(name);
                 System.out.println("Original: " + name);
                 System.out.println("Reversed: " + reversedText);
                 break;
@@ -55,25 +56,56 @@ public class Main {
         }
     }
 
-    static void Append(String s1) {
+    void Append(String s1) {
         String name = "Python Programming";
         String newString = s1 + name;
         System.out.println("Final String: " + newString);
     }
 
-    static void Replace(String sentence, String oldWord, String newWord) {
-        String result = sentence.replace(oldWord, newWord);
-        System.out.println("Modified sentence: " + result);
+    String Replace(String text, char oldChar, char newChar) {
+        char[] arr = new char[text.length()];
+        for (int i = 0; i < text.length(); i++) {
+            arr[i] = text.charAt(i);
+        }
+
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == oldChar) {
+                arr[i] = newChar;
+            }
+        }
+
+        return new String(arr);
     }
 
-    static String sort(String text) {
-        char[] chars = text.toLowerCase().toCharArray();
-        Arrays.sort(chars);
-        return new String(chars);
+    String sort(String currentString) {
+        if (currentString.isEmpty()) {
+            System.out.println("String is empty! Nothing to sort.");
+            return "No sorting is Possible";
+        }
+        int n = currentString.length();
+        char[] arr = new char[n];
 
+        for (int i = 0; i < n; i++) {
+            arr[i] = currentString.charAt(i);
+        }
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    char temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+            }
+        }
+        String result = "";
+        for (int i = 0; i < n; i++) {
+            result = result + arr[i];
+        }
+
+        return result;
     }
 
-    static String reverse(String text) {
+    String reverse(String text) {
         if (text.isEmpty()) {
             System.out.println("String is empty! Nothing to reverse.");
             return text;
@@ -88,3 +120,8 @@ public class Main {
         return result;
     }
 }
+
+
+
+
+
