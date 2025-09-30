@@ -1,3 +1,6 @@
+//Java Menu-Driven Program – String & Number Operations
+//Author - Tanishq Saini
+//Date - 30/9/25
 import java.util.Arrays;
 import java.util.Scanner;
 public class Main {
