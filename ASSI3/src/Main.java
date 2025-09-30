@@ -4,6 +4,19 @@
 import java.util.Arrays;
 import java.util.Scanner;
 public class Main {
+    private void solve(String op, int open, int close, String[] ans, int[] index) {
+        if (open == 0 && close == 0) {
+            ans[index[0]++] = op;
+            return;
+        }
+        if (open > 0) {
+            solve(op + "(", open - 1, close, ans, index);
+        }
+        if (close > open) {
+            solve(op + ")", open, close - 1, ans, index);
+        }
+    }
+
     int countValid(int n) {
         if (n <= 1) return 1;
         int res = 0;
@@ -12,20 +25,6 @@ public class Main {
         }
         return res;
     }
-
-    private void solve(String op, int open, int close, String[] ans, int[] index) {
-        if (open == 0 && close == 0) {
-            ans[index[0]++] = op;
-            return;
-        }
-        if (open > 0) {
-            solve(op + "(", open - 1, close, ans,index);
-        }
-        if (close > open) {
-            solve(op + ")", open, close - 1, ans,index);
-        }
-    }
-
     String[] generateParenthesis(int n) {
         int total = countValid(n);
         String[] ans = new String[total];
@@ -97,17 +96,15 @@ public class Main {
                 """;
 
         do {
-
-            System.out.println("Enter the operation you want to perform:\n" + operationName);
+            System.out.print("Enter the operation you want to perform:\n" + operationName);
             String operationNumber = userInput.nextLine();
-
             switch (operationNumber) {
-
                 case "1" -> {
                     System.out.println("Enter the number of parenthesis: ");
                     if (userInput.hasNextInt()) {
                         int input = userInput.nextInt();
-                        System.out.println(myOperationsObject.generateParenthesis(input));
+                        System.out.println(Arrays.toString(myOperationsObject.generateParenthesis(input)));
+                        userInput.nextLine();
                     } else {
                         System.out.println("Invalid input !!");
                     }
@@ -160,6 +157,7 @@ public class Main {
 
                 default -> System.out.println("Invalid input !!");
             }
+            System.out.println();
             System.out.println("Do you want to perform operations again ?? (y/n) : ");
             String userResponse = userInput.nextLine();
             keepGoing = userResponse.equalsIgnoreCase("y");
